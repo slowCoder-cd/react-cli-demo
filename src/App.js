@@ -47,6 +47,16 @@ export default class App extends Component {
       ]
     })
   }
+  // 删除 一个待办事项列表
+  removeTodoList = id => {
+    const newTodos = this.state.todos.filter(item => item.id !== id)
+    // console.log('remove')
+    this.setState({
+      todos: [
+        ...newTodos
+      ] 
+    })
+  }
   render() {
     return (
       <div>
@@ -55,7 +65,7 @@ export default class App extends Component {
           <h2>副标题：today</h2>
         </TodoHeader>
         <TodoInput onAddTodo={this.addTodoList}/>
-        <TodoList todos={ this.state.todos }/>
+        <TodoList todos={ this.state.todos } removeItem={this.removeTodoList}/>
       </div>
     )
   }
