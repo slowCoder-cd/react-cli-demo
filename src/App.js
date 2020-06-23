@@ -47,6 +47,17 @@ export default class App extends Component {
       ]
     })
   }
+  // 改变完成状态
+  changeComplete = id => {
+    this.setState({
+      todos: this.state.todos.map(item => {
+        if (item.id === id) {
+          item.completed = !item.completed
+        }
+        return item
+      })
+    })
+  }
   // 删除 一个待办事项列表
   removeTodoList = id => {
     const newTodos = this.state.todos.filter(item => item.id !== id)
@@ -65,7 +76,7 @@ export default class App extends Component {
           <h2>副标题：today</h2>
         </TodoHeader>
         <TodoInput onAddTodo={this.addTodoList}/>
-        <TodoList todos={ this.state.todos } removeItem={this.removeTodoList}/>
+        <TodoList todos={ this.state.todos } removeItem={this.removeTodoList} changeComplete={this.changeComplete}/>
       </div>
     )
   }

@@ -7,6 +7,10 @@ export default class TodoItem extends Component {
     // console.log(this.props)
     this.props.removeItem(id)
   }
+  changeState = () => {
+    const { id } =  this.props
+    this.props.changeComplete( id )
+  }
   render() {
     const { title, completed } = this.props
     return (
@@ -14,7 +18,7 @@ export default class TodoItem extends Component {
         <p>标题：{ title }</p>
         <p>状态：{ completed?'已完成': '未完成' }</p>
         <p>
-          <button>标记为{ completed?'未': '已' }完成</button>
+          <button onClick={ this.changeState }>标记为{ completed?'未': '已' }完成</button>
           <button onClick={ this.removeTodoItem }>删除</button>
         </p>
       </li>

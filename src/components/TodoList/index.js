@@ -8,7 +8,7 @@ export default class TodoList extends Component {
           展开运算符传递 props 
         */}
         {
-          this.props.todos.map(todoItem => <TodoItem removeItem={this.props.removeItem} {...todoItem} key={todoItem.id}/>)
+          this.props.todos.map(todoItem => <TodoItem changeComplete={this.props.changeComplete} removeItem={this.props.removeItem} {...todoItem} key={todoItem.id}/>)
         }
       </ul>
     )
