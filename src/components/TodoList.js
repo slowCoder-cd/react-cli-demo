@@ -8,8 +8,7 @@ export class TodoList extends Component {
       <div>
         <h1>待办事项列表</h1>
         <ul>
-          { this.props.todos.map(todo => <TodoItem key={todo.id} { ...todo } />) }
-          <TodoItem/>
+          { this.props.todos.map(todo => <TodoItem key={todo.get('id')} { ...todo.toJS() } />) }
         </ul>
       </div>
     )
