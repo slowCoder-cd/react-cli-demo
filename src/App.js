@@ -2,49 +2,49 @@ import React, { Component } from 'react'
 import TodoHeader from './components/TodoHeader'
 import TodoInput from './components/TodoInput'
 import TodoList from './components/TodoList'
+import 'antd/dist/antd.css'
 
 export default class App extends Component {
-  // 组件自身内部所要用到的数据 state 需要bebal 转化器
-  // 也可以放在 constructor 构造器里
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     todo: []
-  //   }
-  // }
+  
   state = {
-    todos:[  // 存放所有待办事项
+    todos: []
+  }
+  componentDidMount() {
+    const oldTodos = [  // 存放所有待办事项
       {
         id: 1,
         title: '切饭',
         completed: true
-      },
-      {
-        id: 2,
-        title: '睡瞌睡',
-        completed: true
-      },
-      {
-        id: 3,
-        title: '敲代码',
-        completed: true
       }
     ]
+    const newTodos = JSON.parse(sessionStorage.getItem('todos'))
+    if (newTodos) {
+      this.setState({
+        todos: newTodos
+      })
+    } else {
+      this.setState({
+        todos: oldTodos
+      })
+    }
+    
   }
-  // 全局id
-  index = 3
   // 添加待办事项函数 利用props 传递给 子组件
   addTodoList = (title) => {
     if (!title) return
+    let id = parseInt(Math.random() * 100)
     this.setState({
       todos: [
         ...this.state.todos,
         {
-          id: ++this.index,
+          id: ++id,
           title,
           completed: false
         }
       ]
+    }, () => {
+      // 存储在 会话存储中
+      window.sessionStorage.setItem('todos',JSON.stringify(this.state.todos))
     })
   }
   // 改变完成状态
@@ -56,6 +56,8 @@ export default class App extends Component {
         }
         return item
       })
+    }, () => {
+      window.sessionStorage.setItem('todos',JSON.stringify(this.state.todos))
     })
   }
   // 删除 一个待办事项列表
@@ -66,6 +68,8 @@ export default class App extends Component {
       todos: [
         ...newTodos
       ] 
+    }, () => {
+      window.sessionStorage.setItem('todos',JSON.stringify(this.state.todos))
     })
   }
   render() {

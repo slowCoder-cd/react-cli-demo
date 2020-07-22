@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Card, Button } from 'antd'
 
 export default class TodoItem extends Component {
   // 删除 一个待办事项
@@ -14,14 +15,12 @@ export default class TodoItem extends Component {
   render() {
     const { title, completed } = this.props
     return (
-      <li style={{ width:'25%', textAlign:'center', listStyle:'none' }}>
-        <p>标题：{ title }</p>
-        <p>状态：{ completed?'已完成': '未完成' }</p>
+      <Card title={ title }  style={{ width:'24%', textAlign:'center',margin:8 }}>
         <p>
-          <button onClick={ this.changeState }>标记为{ completed?'未': '已' }完成</button>
-          <button onClick={ this.removeTodoItem }>删除</button>
-        </p>
-      </li>
+            <Button type="primary" style={{ marginRight:10 }}  onClick={ this.changeState }>标记为{ completed?'未': '已' }完成</Button>
+            <Button type="default" onClick={ this.removeTodoItem }>删除</Button >
+          </p>
+      </Card>
     )
   }
 }
